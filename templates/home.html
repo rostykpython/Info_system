@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <title>TransportUa</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+      <style>
+          .carousel-item {
+              height: 100vh;
+              min-height: 350px;
+              background: no-repeat center center scroll;
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+          }
+      </style>
+  </head>
+<body>
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">TransportUa</a>
+
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/track1.png' %}" height="36"></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item" style="margin-right: 10px">
+                    <a class="nav-link" href="{% url 'orders' %}">Orders</a>
+                </li>
+
+                <li class="nav-item">
+                    {% if not request.user.is_authenticated %}
+                        <a type="button" class="btn btn-outline-primary" href="{% url 'login' %}">Login</a>
+                    {% else %}
+                        <a type="button" class="btn btn-outline-primary" href="{% url 'logout' %}">Logout</a>
+                    {% endif %}
+                </li>
+            {% if request.user.is_staff %}
+                <li class="nav-item">
+                    <a class="btn" href="{% url 'taxes' %}">Admin</a>
+                </li>
+            {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% block content %}
+<header>
+  <div id="carouselExampleCaptions"  class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" style="background-image: url('{% static 'img/tp2.jpg' %}')">
+        <div class="carousel-caption">
+          <h5>Company abilities</h5>
+          <p>The company will help implement any types of transportation, transport various types of cargo and goods, and provide related services</p>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image: url('{% static 'img/tp1.jpeg' %}')">
+        <div class="carousel-caption">
+          <h5>Qualified personnel</h5>
+          <p>Thanks to our team, you will get a quality result!</p>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image: url('{% static 'img/tp3.jpg' %}')">
+        <div class="carousel-caption">
+          <h5>Speed</h5>
+          <p>As you know, time is money. We value our time and the time of our customers.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</header>
+
+<section class="py-5" style="margin: auto 20% 0 20%">
+  <div class="container" >
+    <h1 class="fw-light">About our company</h1>
+    <p class="lead">The <a href="{% url 'home' %}">TransporUa company</a> provides a wide range of services in the field of
+        freight transportation in Kyiv. We offer favorable tariffs, we carry out freight transportation around the city
+        and beyond, we have our own fleet of vehicles of various capacities (from 0.8 to 5 tons).
+        Our services have been appreciated by many clients. They turn to us again,
+        if you need to order reliable, safe, inexpensive and fast delivery of goods.</p>
+  </div>
+</section>
+{% endblock %}
+</body>
+</html>

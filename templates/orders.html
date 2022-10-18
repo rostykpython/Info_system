@@ -1,0 +1,130 @@
+{% extends 'home.html' %}
+{% block content %}
+{% load static %}
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col-4">
+                <form method="get">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input type="text" name="search_area" class="form-control rounded" placeholder="Search" aria-label="Search"
+                           aria-describedby="search-addon"/>
+                        <input type="submit" class="btn btn-primary rounded-1" value="Search">
+                        <a class="btn btn-dark rounded-3" href="{% url 'create_order' %}" style="margin-left: 10px">Create order</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-1">
+
+            </div>
+            <div class="col">
+            </div>
+        </div>
+        <div class="row py-5" style="margin-left: 4%">
+            <div class="col-2">
+            {% if request.user.is_staff %}
+                <div class="card">
+                    <article class="card-group-item">
+                        <header class="card-header">
+                            <h6 class="title">Filters</h6>
+                        </header>
+                        <div class="filter-content">
+                            <div class="card-body">
+                                <form method="get">
+                                {% if filter_tags%}
+                                    {% for tag in filter_tags %}
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="1" name="{{ tag }}"
+                                                   {% if tag in request.GET %}checked{% endif %}>
+                                            <span class="form-check-label">
+                                            {{ tag }}
+                                        </span>
+                                        </label>
+                                    {% endfor %}
+                                        <input class="btn btn-secondary mt-3 card-link" type="submit" value="Find">
+                                    <a class="card-link btn btn-secondary mt-3" href="{% url 'orders' %}">Reset</a>
+
+                                {% else %}
+                                    <p class="card-text">No filters available</p>
+                                {% endif %}
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            {% endif %}
+            </div>
+            <div class="col-7">
+                 <div class="container">
+                 {% if orders %}
+                     <div class="row row-cols-3">
+                         {% for order in orders %}
+                         <div class="col mb-4" style="min-height: fit-content">
+                             <div class="card" {% if order.is_completed %} style="background: #CCFF99" {% endif %}>
+                                 {% if order.transport_type == 'lightweight' %}
+                                     <div style="text-align: center">
+                                         <img src="{% static 'img/lightweight.png'%}" class="card-img-top" style="max-width: 60%">
+                                     </div>
+                                 {% endif %}
+                                 {% if order.transport_type == 'halfweight' %}
+                                     <div style="text-align: center">
+                                         <img src="{% static 'img/halfweight.png'%}" class="card-img-top" style="max-width: 60%">
+                                     </div>
+                                 {% endif %}
+                                 {% if order.transport_type == 'heavyweight' %}
+                                     <div style="text-align: center">
+                                         <img src="{% static 'img/heavyweight.png'%}" class="card-img-top" style="max-width: 60%">
+                                     </div>
+                                 {% endif %}
+                                 <div class="card-body">
+                                     <h5 class="card-title"> {{ order.name }}</h5>
+                                     <p class="card-text">
+                                         {{ order.phone_number }}
+                                     </p>
+                                    <p class="card-text">{{ order.email }}</p>
+                                     <p class="card-text" style="font-size: small">{{ order.shipping_city }} -> {{ order.delivery_city }}</p>
+
+                                     <a class="btn btn-primary" href="{% url 'order' order.id%}">Detail</a>
+                                {% if not order.is_completed %}
+                                     <a class="btn btn-outline-dark" href="{% url 'edit_order' order.id%}">Edit</a>
+                                     {% if request.user.is_staff %}
+                                     <a type="submit" class="btn btn-danger" href="{% url 'delete_order' order.id%}">Delete</a>
+                                     {% endif %}
+                                 {% endif %}
+
+                                 </div>
+                             </div>
+                         </div>
+                     {% endfor %}
+                     </div>
+
+                     {% else %}
+                     <div class="row">
+
+
+                        <div class="col">
+
+                        </div>
+                        <div class="col-5">
+                            <div class="card border-0" style="width: auto;">
+                                <div style="text-align: center; margin-top: 20px">
+                                    <img src="{% static 'img/nothing.png'%}" class="card-img-top" style="max-width: 10rem">
+                                    <div class="card-body mt-4">
+                                        <h5 class="card-title">No orders found!</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col"></div>
+
+                 {% endif %}
+                 </div>
+            </div>
+            <div class="col-3">
+                 <h1></h1>
+            </div>
+        </div>
+    </div>
+{% endblock %}

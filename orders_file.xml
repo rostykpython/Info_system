@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Orders>
+    <order>
+        <name>Rostyslav</name>
+        <phone>+380682450080</phone>
+        <email>rostislavlitvinets@gmail.com</email>
+        <shipping_address>Naberezhna</shipping_address>
+        <shipping_city>Ivano-Frankivsk</shipping_city>
+        <delivery_address>Oleny Teligy</delivery_address>
+        <delivery_city>Kiyv</delivery_city>
+        <transport_type>heavyweight</transport_type>
+        <date>14-11-2022</date>
+        <addinfo>We need a shipping at late time</addinfo>
+    </order>
+    <order>
+        <name>Danylo</name>
+        <phone>+380982450080</phone>
+        <email>danylo.v@gmail.com</email>
+        <shipping_address>Korolya Danyla 42</shipping_address>
+        <shipping_city>Lviv</shipping_city>
+        <delivery_address>Oleny Teligy</delivery_address>
+        <delivery_city>Kiyv</delivery_city>
+        <transport_type>lightweight</transport_type>
+        <date>20-11-2022</date>
+        <addinfo>Call me back as fast as possible!</addinfo>
+    </order>
+    <order>
+        <name>Ivan</name>
+        <phone>+380982455580</phone>
+        <email>ivan.f@gmail.com</email>
+        <shipping_address>Bogdana Khmelnytskyi 18</shipping_address>
+        <shipping_city>Poltava</shipping_city>
+        <delivery_address>Ivana Sirka</delivery_address>
+        <delivery_city>Lviv</delivery_city>
+        <transport_type>heavyweight</transport_type>
+        <date>29-10-2022</date>
+        <addinfo>Please call me back!</addinfo>
+    </order>
+</Orders>

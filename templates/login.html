@@ -1,0 +1,26 @@
+{% extends 'home.html' %}
+{% load crispy_forms_filters %}
+{% block content %}
+{% load static %}
+    <div class="container-fluid" style="margin-top: 10vh">
+        <div class="row justify-content-md-center">
+            <div class="col col-sm-2">
+            </div>
+            <div class="col-md-3">
+                <h2 style="text-align: center">Login</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div style="text-align: center; margin-bottom: 5%">
+                        <input class="btn btn-success center" type="submit" value="Login">
+                    </div>
+                </form>
+                <div style="text-align: center"><a href="{% url 'register' %}">Aren`t register yet? Register now</a></div>
+
+            </div>
+            <div class="col col-sm-2">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

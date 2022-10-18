@@ -1,0 +1,74 @@
+{% extends 'home.html' %}
+{% block content %}
+{% load static %}
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col-4">
+                <form method="get">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input type="text" name="search_area" class="form-control rounded" placeholder="Search" aria-label="Search"
+                           aria-describedby="search-addon"/>
+                        <input type="submit" class="btn btn-primary rounded-1" value="Search">
+                        <a class="btn btn-dark rounded-3" href="{% url 'create_tax' %}" style="margin-left: 10px">Create tax</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-1">
+
+            </div>
+            <div class="col">
+            </div>
+        </div>
+        <div class="row py-5" style="margin-left: 4%">
+            <div class="col-2">
+
+            </div>
+            <div class="col-7">
+                 <div class="container">
+                 {% if taxes %}
+                     <div class="row row-cols-3">
+                         {% for tax in taxes %}
+                         <div class="col mb-4" style="min-height: fit-content">
+                             <div class="card">
+
+                                 <div class="card-body">
+                                     <h5 class="card-title">Summary of taxes by {{ tax.month }} month </h5>
+                                     <p class="card-text">01-{{ tax.month }}-{{ tax.year }}</p>
+                                     <a class="btn btn-primary" href="{% url 'tax' tax.id%}">Detail</a>
+                                     <a type="submit" class="btn btn-danger" href="{% url 'delete_tax' tax.id%}">Delete</a>
+
+
+                                 </div>
+                             </div>
+                         </div>
+                     {% endfor %}
+                     </div>
+
+                     {% else %}
+                     <div class="row">
+                        <div class="col">
+                        </div>
+                        <div class="col-5">
+                            <div class="card border-0" style="width: auto;">
+                                <div style="text-align: center; margin-top: 20px">
+                                    <img src="{% static 'img/nothing.png'%}" class="card-img-top" style="max-width: 10rem">
+                                    <div class="card-body mt-4">
+                                        <h5 class="card-title">No summary found!</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col"></div>
+
+                 {% endif %}
+                 </div>
+            </div>
+            <div class="col-3">
+                 <h1></h1>
+            </div>
+        </div>
+    </div>
+{% endblock %}

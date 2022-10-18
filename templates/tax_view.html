@@ -1,0 +1,33 @@
+{% extends 'home.html' %}
+{% block content %}
+{% load static %}
+
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+                <div class="card">
+
+                    <div class="card-body" style="max-height: 90%; margin-bottom: 20px">
+                        <div style="text-align: center">
+                            <img src="{% static 'img/tax.png'%}" class="card-img-top" style="max-width: 60%">
+                        </div>
+                        <h5 class="card-title">Summary of taxes by {{ month }}</h5>
+                        <p class="card-text">01-{{ tax.month }}-{{ tax.year }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush" style="max-height: 90%">
+                        <li class="list-group-item">Tax on profit by month: {{ tax.taxes_on_profit }} grn</li>
+                        <li class="list-group-item">Tax of workers by month: {{ tax.taxes_of_workers }} grn</li>
+                        <li class="list-group-item">EUV by month: {{ tax.euv_of_workers }} grn</li>
+                        <li class="list-group-item"><a href="{% url 'taxes' %}">Back to taxes summary</a></li>
+                    </ul>
+{#                    <div class="card-body">#}
+{#                    </div>#}
+                </div>
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+{% endblock %}

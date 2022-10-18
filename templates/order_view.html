@@ -1,0 +1,59 @@
+{% extends 'home.html' %}
+{% block content %}
+{% load static %}
+
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+                <div class="card">
+                    {% if order.transport_type == 'lightweight' %}
+                        <div style="text-align: center">
+                            <img src="{% static 'img/lightweight.png'%}" class="card-img-top" style="max-width: 60%">
+                        </div>
+                    {% endif %}
+                    {% if order.transport_type == 'halfweight' %}
+                        <div style="text-align: center">
+                            <img src="{% static 'img/halfweight.png'%}" class="card-img-top" style="max-width: 60%">
+                        </div>
+                    {% endif %}
+                    {% if order.transport_type == 'heavyweight' %}
+                        <div style="text-align: center">
+                            <img src="{% static 'img/heavyweight.png'%}" class="card-img-top" style="max-width: 60%">
+                        </div>
+                    {% endif %}
+                    <div class="card-body" style="max-height: 90%">
+                        <h5 class="card-title">{{ order.name }}</h5>
+                        <p class="card-text">{{ order.phone_number }} {{ order.email }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush" style="max-height: 90%">
+                        <li id="address" class="list-group-item">{{ order.shipping_city }}, {{ order.shipping_address }} ->
+                            {{ order.delivery_city }}, {{ order.delivery_address_address }}</li>
+                        <li class="list-group-item">{{ order.datetime }}</li>
+                        {% if order.add_info %}
+                        <li class="list-group-item">{{ order.add_info }}</li>
+                        {% endif %}
+                        <li id="price" class="list-group-item">Estimated price delivery: {{ price }} grn</li>
+                    </ul>
+                    <div class="card-body">
+                    {% if request.user.is_superuser %}
+                        {% if not order.is_completed %}
+                            <form method="get">
+                                <button class="btn btn-success" href="{% url 'order' order.id %}" name="complete"
+                                        value="1">Complete</button>
+                            </form>
+                            {% else %}
+                            <a class="card-link" href="{% url 'orders'%}">Back to orders</a>
+                        {% endif %}
+                        {% else %}
+                        <a class="card-link" href="{% url 'orders'%}">Back to orders</a>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+{% endblock %}
